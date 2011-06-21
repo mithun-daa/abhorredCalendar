@@ -1,35 +1,42 @@
 ﻿/// <reference path="jquery-1.4.1-vsdoc.js" />
 
 (function ($) {
-    $.fn.abhoredCalendar = function (options) {
-        var today = new Date();
+    var today = new Date(), options, $this;
 
-        var defaults = {
-            calDate: today,
-            isThemed: true,
-            addButtonClicked: doAdd,
-            monthChanged: doMonthChange
-        };
+    var defaults = {
+        calDate: today,
+        isThemed: false,
+        data: null,
+        addButtonClicked: doAdd,
+        monthChanged: doMonthChange
+    };
 
-        var options = $.extend(defaults, options);
+    $.fn.abhoredCalendar = function (settings) {
+
+        options = $.extend({}, defaults, settings);
 
         //wire up the button event handler
-        $('.acAdd').live('click', options.addButtonClicked);
+        $('.acAddTime').live('click', options.addButtonClicked);
 
         return this.each(function () {
-            var $this = $(this);
-            buildCalendarHeader(options, $this);
-            $this.append("<div id='calHolder'></div>");
-            buildMonthCalendar(options, $this);
+            $this = $(this);
+            buildCalendarHeader();
+            $this.append("<div id='calHolder' class='" + (options.isThemed ? "ui-widget-content" : "nonThemedCalHolderBG") + "'></div>");
+            buildMonthCalendar();
         });
     };
 
-    function buildCalendarHeader(options, $this) {
-        //The calendar header was inspired by and based off of a nettuts+ premium tutorial.
-        //nettuts+ rocks
-        //http://net.tutsplus.com/tutorials/html-css-techniques/how-to-build-a-beautiful-calendar-widget-new-premium-tutorial/
-        var calHeader = '<div class="acHeader"><span class="left button" id="prev">< </span><span class="left hook"></span><span class="month-year" id="acMonthLabel"></span><span class="right hook" id=""></span><span class="right button" id="next">> </span></div>';
+    $.fn.abhoredCalendar.setData = function (data) {
+        options.data = data;
+        buildMonthCalendar();
+    };
+
+    function buildCalendarHeader() {
+        var class = options.isThemed ? 'ui-accordion-header ui-helper-reset ui-state-active ui-corner-top' : 'nonThemedHeader';
+        var calHeader = '<div class="acHeader ' + class + ' "><span class="left button" id="prev">< </span><span class="left hook"></span><span class="month-year" id="acMonthLabel"></span><span class="right hook" id=""></span><span class="right button" id="next">> </span></div>';
         $this.append(calHeader);
+
+        
 
         var selectedMonth = options.calDate.getMonth();
         var selectedYear = options.calDate.getFullYear();
@@ -46,7 +53,7 @@
             options.calDate.setMonth(selectedMonth);
             options.calDate.setFullYear(selectedYear);
             options.monthChanged.call(this, new Date(options.calDate.getFullYear(), options.calDate.getMonth(), 1));
-            buildMonthCalendar(options, $this);
+            buildMonthCalendar();
         });
 
         $('#next', $this).click(function () {
@@ -61,12 +68,12 @@
             options.calDate.setMonth(selectedMonth);
             options.calDate.setFullYear(selectedYear);
             options.monthChanged.call(this, new Date(options.calDate.getFullYear(), options.calDate.getMonth(), 1));
-            buildMonthCalendar(options, $this);
+            buildMonthCalendar();
         });
-        
+
     }
 
-    function buildMonthCalendar(options, $this) {
+    function buildMonthCalendar() {
         //broke down single variable into multiple for concatenations 
         //purposes. Source: http://www.softwaresecretweapons.com/jspwiki/javascriptstringconcatenation
         var currentMonth = new Date(options.calDate.getFullYear(), options.calDate.getMonth(), 1);
@@ -76,7 +83,7 @@
         var dateIncr = 1;
         var currentDate;
         var firstTime = new Boolean(true);
-        var tableHtml = "<table><tr class='acDays'><td>sun</td><td>mon</td><td>tue</td><td>wed</td><td>thu</td><td>fri</td><td>sat</td></tr><tr>";
+        var tableHtml = "<table><tr class='acDaysofWeek " + (options.isThemed ? "ui-widget-header" : "nonThemedDaysOfWeek") +"'><td>sun</td><td>mon</td><td>tue</td><td>wed</td><td>thu</td><td>fri</td><td>sat</td></tr><tr>";
         var emptyTDs = '';
         var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
@@ -104,13 +111,18 @@
             }
 
             var buttonID = (currentDate.getMonth() + 1) + "/" + currentDate.getDate() + "/" + currentDate.getFullYear();
-            tdsWithDates += "<td><div>" + dateIncr + "</div><div>0</div><div><button id='" + buttonID + "' class='acAdd'>+</button></div></td>";
+
+            var hours = 0;
+            if (options.data && options.data[dateIncr + ""])
+                hours = parseInt(options.data[dateIncr + ""]);
+
+            tdsWithDates += "<td><div class='acDay'>" + dateIncr + "</div><div class='acHours'>" + hours + "</div><div class='acButtonDiv'><button id='" + buttonID + "' class='acAddTime'>+</button></div></td>";
             tableHtml += tdsWithDates;
             dateIncr++;
         }
 
         tableHtml += "</table>";
-        $('#calHolder',$this).empty().html(tableHtml);
+        $('#calHolder', $this).empty().html(tableHtml);
     }
 
     function doAdd() {
@@ -118,7 +130,7 @@
     }
 
     function doMonthChange(something) {
-        
+
     }
 })(jQuery);
 

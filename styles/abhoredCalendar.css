@@ -1,0 +1,192 @@
+﻿/*  ---------------------------------------------------------------------------------------------------------------------
+    The calendar header was inspired by and based off of a nettuts+ premium tutorial.
+    nettuts+ totally rocks!!!!!!!!!!
+    http://net.tutsplus.com/tutorials/html-css-techniques/how-to-build-a-beautiful-calendar-widget-new-premium-tutorial/ 
+    ---------------------------------------------------------------------------------------------------------------------*/
+#calHolder table
+{
+    width:100%;
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+.acHeader {
+	cursor:default;
+	height:34px;
+	position:relative;
+	color:Gray;
+	font-weight:bold;
+	text-transform: uppercase;
+}
+
+    .acHeader span {
+	    display:inline-block;
+	    line-height:34px;
+    }
+
+    .acHeader .hook {
+	    width:9px;
+	    height: 28px;
+	    position:absolute;
+	    bottom:60%;
+	    border-radius:10px;
+	    -moz-border-radius:10px;
+	    -webkit-border-radius:10px;
+	    background:#ececec;
+	    background: -moz-linear-gradient(right top, #fff, #827e7d);
+	    background: -webkit-gradient(linear, right top, right bottom, from(#fff), to(#827e7d));
+	    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.65);
+	    -moz-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.65);
+	    -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.65);
+    }
+    
+        .right.hook {
+	        right:15%;
+        }
+    
+        .left.hook {
+	        left:15%;
+        }
+    
+    .acHeader .button {
+	    width:10%;
+	    text-align:center;
+    }
+
+        .acHeader .button:hover 
+        {
+            background: #cd0a0a;
+	        background: -moz-linear-gradient(top, #cd0a0a, #bb330f);
+	        background: -webkit-gradient(linear, left top, left bottom, from(#cd0a0a), to(#bb330f));
+        }
+
+        #prev:hover
+        {
+            border-top-left-radius: 6px;
+        }
+
+        #next:hover
+        {
+            border-top-right-radius: 6px;
+        }
+        
+    #acMonthLabel
+    {
+        width: 80%;
+        text-align:center;
+    }
+
+.nonThemedHeader
+{
+    color:#fff;
+    background: #cd310d;
+	background: -moz-linear-gradient(top, #b32b0c, #cd310d);
+	background: -webkit-gradient(linear, left top, left bottom, from(#b32b0c), to(#cd310d));
+	-webkit-border-top-left-radius:5px;
+	-webkit-border-top-right-radius:5px;
+	-moz-border-radius-topleft:5px;
+	-moz-border-radius-topright:5px;
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+}
+
+.nonThemedCalHolderBG
+{
+    background:white;
+}
+
+.acDaysofWeek
+{
+    
+}
+
+.nonThemedDaysOfWeek
+{
+    background:  #f9f9f9;
+    border-bottom:1px solid #dcdcdc;
+}
+
+#calHolder td
+{
+    color:#2d2d2d;
+    padding: 1px;
+    width:100px;
+    text-align:center;
+    padding: 0;
+    line-height:30px;
+	text-align:center;
+	cursor:default;
+	padding:1px;
+}
+
+    .acDay
+    {
+        background-color:#ededed;
+	    color:#777777;
+	    text-shadow:1px 1px 0 #ffffff;
+        border-radius: 4px 4px 0 0;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-top:1px solid #dcdcdc;
+        border-right:1px solid #dcdcdc;
+        border-left:1px solid #dcdcdc;
+        padding: 5px;
+    }
+
+    .acHours
+    {
+        font-size:2em;
+        background-color:#f9f9f9;
+	    color:#666666;
+	    border-right:1px solid #dcdcdc;
+	    border-left:1px solid #dcdcdc;
+	    text-shadow:1px 1px 0 #ffffff;
+        padding:10px 5px;
+    }
+
+    .acButtonDiv
+    {
+        background-color:#ededed;
+	    color:#777777;
+	    text-shadow:1px 1px 0 #ffffff;
+        border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        -moz-border-radius: 0 0 4px 4px;
+        border-bottom:1px solid #dcdcdc;
+        border-right:1px solid #dcdcdc;
+        border-left:1px solid #dcdcdc;
+        padding: 5px;
+    }
+    
+        .acAddTime {
+	        -moz-box-shadow:inset 0 1px 0 0 #ffffff;
+	        -webkit-box-shadow:inset 0 1px 0 0 #ffffff;
+	        box-shadow:inset 0 1px 0 0 #ffffff;
+	        background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	        background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	        background-color:#ededed;
+	        -moz-border-radius:18px;
+	        -webkit-border-radius:18px;
+	        border-radius:18px;
+	        border:2px solid #dcdcdc;
+	        display:inline-block;
+	        color:#777777;
+	        font-family:Trebuchet MS;
+	        font-size:18px;
+	        font-weight:normal;
+	        padding:0px 6px;
+	        text-decoration:none;
+	        text-shadow:1px 1px 0 #ffffff;
+        }
+            .acAddTime:hover {
+	            background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	            background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	            background-color:#dfdfdf;
+            }
+            .acAddTime:active {
+	            position:relative;
+	            top:1px;
+            }    
