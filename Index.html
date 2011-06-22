@@ -9,35 +9,76 @@
     <!-- !CSS -->
     <link href="styles/style.css" rel="stylesheet" />
     <link href="styles/abhoredCalendar.css" rel="stylesheet" type="text/css" />
-     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/cupertino/jquery-ui.css"
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/cupertino/jquery-ui.css"
         rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div id="menu">
+        <button id="Themed" class="myButton">
+            Themed</button>
+        <button id="customcss" class="myButton">
+            Custom CSS</button>
+    </div>
     <div id="container">
+    </div>
+    <div id="jdialog">
+        <div>
+            This dialog is show from the callback. You clicked <span id="datepassed"></span>
+            Your implementation goes here...
+        </div>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.11/jquery-ui.min.js" type="text/javascript"></script>
     <script src="scripts/jquery.abhoredCalendar.js" type="text/javascript"></script>
     <script type="text/javascript">
+        var isThemed = false;
+
         $(document).ready(function () {
-            //Default intitialization
-            //$('#container').abhoredCalendar();
-            var data = {"1": "2","5": "10", "17":"4"};
-            //CALLBACK function 
+            //jQuery inits
+            $('#Themed').click(function () {
+                isThemed = true;
+                $('#container').empty().abhoredCalendar({ isThemed: true, addButtonClicked: addButtonCallback, monthChanged: doMonthChange, data: data });
+            });
+
+            $('#customcss').click(function () {
+                isThemed = false;
+                $('#container').empty().abhoredCalendar({ isThemed: false, addButtonClicked: addButtonCallback, monthChanged: doMonthChange, data: data });
+            });
+
+            $('#jdialog').dialog({
+                autoOpen: false,
+                modal: true
+            });
+
+            /*-------------------------------------------------------------------------------------
+                                        ABHORRED CALENDAR INITs
+            -------------------------------------------------------------------------------------*/
+            //Hard coded data
+            var data = { "1": "2", "5": "10", "17": "4" };
+
+            //with CALLBACK function 
             $('#container').abhoredCalendar({ addButtonClicked: addButtonCallback, monthChanged: doMonthChange, data: data });
 
-            //inlineCALLBACK function
-            //$('#container').abhoredCalendar({ addButtonClicked: function () {
-            //    alert('This is coming from the add button callback. You clicked: ' + $(this).attr('id'));
-            //}});
+            /*Default intitialization
+            $('#container').abhoredCalendar();
+            inline CALLBACK function
+            $('#container').abhoredCalendar({ addButtonClicked: function () {
+            alert('This is coming from the add button callback. You clicked: ' + $(this).attr('id'));
+            }});*/
         });
 
+        // PRIVATE METHODS
         function addButtonCallback() {
-            alert('This is coming from the add button callback. You clicked: ' + $(this).attr('id'));
+            $('#datepassed').html($(this).attr('id'));
+            $('#jdialog').dialog('open');
+
         }
 
         function doMonthChange(date) {
-            var data = {"2": "2","4": "10", "7":"4"};
+            //Passing hard-code values for DEMO purposes
+            //This is where an AJAX call would get the data
+            //which will get passed to the calendar
+            var data = { "2": "2", "4": "10", "7": "4" };
             $('#container').abhoredCalendar.setData(data);
         }
     </script>

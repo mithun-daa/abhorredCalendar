@@ -31,6 +31,11 @@
         buildMonthCalendar();
     };
 
+    $.fn.abhoredCalendar.setIsThemed = function (data){
+        options.isThemed = data;
+
+    }
+
     function buildCalendarHeader() {
         var class = options.isThemed ? 'ui-accordion-header ui-helper-reset ui-state-active ui-corner-top' : 'nonThemedHeader';
         var calHeader = '<div class="acHeader ' + class + ' "><span class="left button" id="prev">< </span><span class="left hook"></span><span class="month-year" id="acMonthLabel"></span><span class="right hook" id=""></span><span class="right button" id="next">> </span></div>';
