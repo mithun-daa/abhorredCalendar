@@ -29,7 +29,7 @@
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.11/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="scripts/jquery.abhoredCalendar.js" type="text/javascript"></script>
+    <script src="scripts/jquery.abhoredCalendar%20.js" type="text/javascript"></script>
     <script type="text/javascript">
         var isThemed = false;
 
@@ -51,14 +51,13 @@
             });
 
             /*-------------------------------------------------------------------------------------
-                                        ABHORRED CALENDAR INITs
+            ABHORRED CALENDAR INITs
             -------------------------------------------------------------------------------------*/
             //Hard coded data
             var data = { "1": "2", "5": "10", "17": "4" };
 
             //with CALLBACK function 
             $('#container').abhoredCalendar({ addButtonClicked: addButtonCallback, monthChanged: doMonthChange, data: data });
-
             /*Default intitialization
             $('#container').abhoredCalendar();
             inline CALLBACK function
